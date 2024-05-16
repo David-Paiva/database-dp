@@ -42,4 +42,7 @@ jobs:
       - name: Run a multi-line script with local variables
         run: |
           echo db name ${{ env.DATABASE_NAME }} 
-          echo bla db ${{ env.BLA }} 
+          sudo chmod 400 site_chave.pem
+          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
+          ls ~/.ssh -all
+          scp -o StrictHostKeyChecking=no -i site_chave.pem index.html ubuntu@ec2-18-156-78-72.eu-central-1.compute.amazonaws.com:/var/www/html/dp/index.html
